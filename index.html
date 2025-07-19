@@ -20,6 +20,15 @@
     <div id="resultado"></div>
   </div>
 
+  <!-- Popup de victoria -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <img src="https://cdn-icons-png.flaticon.com/512/2583/2583383.png" alt="Copa" />
+      <h2>🎉 ¡Victoria! Todos los códigos son correctos 🎉</h2>
+      <button onclick="cerrarPopup()">Cerrar</button>
+    </div>
+  </div>
+
   <script>
     const codigosValidos = ["1", "2", "3", "4", "5"];
 
@@ -45,12 +54,16 @@
         }
       });
 
-      if (todosCorrectos) {
-        resultado += `<div class="exito">🎉 ¡Todos los códigos son correctos! Has completado el juego.</div>`;
-      }
-
       document.getElementById("resultado").innerHTML = resultado;
+
+      if (todosCorrectos) {
+        document.getElementById("popup").style.display = "flex";
+      }
     });
+
+    function cerrarPopup() {
+      document.getElementById("popup").style.display = "none";
+    }
   </script>
 </body>
 </html>
