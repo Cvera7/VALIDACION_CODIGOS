@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juego de Validación de Códigos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Valida los 5 códigos</h1>
+    <form id="formulario">
+      <input type="text" id="codigo1" placeholder="Código 1"><br>
+      <input type="text" id="codigo2" placeholder="Código 2"><br>
+      <input type="text" id="codigo3" placeholder="Código 3"><br>
+      <input type="text" id="codigo4" placeholder="Código 4"><br>
+      <input type="text" id="codigo5" placeholder="Código 5"><br>
+      <button type="submit">Validar</button>
+    </form>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    const codigosValidos = ["abc123", "xyz789", "codigo5", "clave2025", "openAI"];
+
+    document.getElementById("formulario").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const ingresados = [
+        document.getElementById("codigo1").value.trim(),
+        document.getElementById("codigo2").value.trim(),
+        document.getElementById("codigo3").value.trim(),
+        document.getElementById("codigo4").value.trim(),
+        document.getElementById("codigo5").value.trim()
+      ];
+
+      let resultado = "";
+      let todosCorrectos = true;
+
+      ingresados.forEach((codigo, index) => {
+        if (codigosValidos.includes(codigo)) {
+          resultado += `<p class="correcto">Código ${index + 1} es correcto ✅</p>`;
+        } else {
+          resultado += `<p class="incorrecto">Código ${index + 1} es incorrecto ❌</p>`;
+          todosCorrectos = false;
+        }
+      });
+
+      if (todosCorrectos) {
+        resultado += `<div class="exito">🎉 ¡Todos los códigos son correctos! Has completado el juego.</div>`;
+      }
+
+      document.getElementById("resultado").innerHTML = resultado;
+    });
+  </script>
+</body>
+</html>
