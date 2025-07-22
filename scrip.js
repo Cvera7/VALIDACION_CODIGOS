@@ -1,23 +1,10 @@
 const codigosValidos = ["1", "2", "3", "4", "5"];
-
-document.getElementById("formulario").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const ingresados = [
-    document.getElementById("codigo1").value.trim(),
-    document.getElementById("codigo2").value.trim(),
-    document.getElementById("codigo3").value.trim(),
-    document.getElementById("codigo4").value.trim(),
-    document.getElementById("codigo5").value.trim()
-  ];
-
-  let resultado = "";
-  let todosCoconst codigosValidos = ["1", "2", "3", "4", "5"];
 let vidas = 6;
 
 document.getElementById("formulario").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  if (vidas <= 0) return; // Si no hay vidas, no hacer nada
+  if (vidas <= 0) return;
 
   const ingresados = [
     document.getElementById("codigo1").value.trim(),
@@ -31,7 +18,7 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
   let todosCorrectos = true;
 
   ingresados.forEach((codigo, index) => {
-    if (codigosValidos.includes(codigo)) {
+    if (codigo === codigosValidos[index]) {
       resultado += `<p class="correcto">Código ${index + 1} es correcto ✅</p>`;
     } else {
       resultado += `<p class="incorrecto">Código ${index + 1} es incorrecto ❌</p>`;
@@ -60,11 +47,11 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
 });
 
 function actualizarVidas() {
-  const vidasSpan = document.getElementById("vidas");
-  if (vidasSpan) vidasSpan.textContent = vidas;
+  document.getElementById("vidas").textContent = vidas;
 }
 
 function cerrarPopup() {
   document.getElementById("popup").style.display = "none";
 }
+
 
