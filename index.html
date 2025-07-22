@@ -1,31 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Juego de Validación</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juego de Validación de Códigos</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h2 id="vidas">Vidas: 6</h2>
-
-  <form id="formulario">
-    <input type="text" id="codigo1" placeholder="Código 1" required>
-    <input type="text" id="codigo2" placeholder="Código 2" disabled>
-    <input type="text" id="codigo3" placeholder="Código 3" disabled>
-    <input type="text" id="codigo4" placeholder="Código 4" disabled>
-    <input type="text" id="codigo5" placeholder="Código 5" disabled>
-    <button type="submit">Validar</button>
-  </form>
-
-  <div id="resultado"></div>
-
-  <div id="popup" class="popup">
-    <p>🎉 ¡Has ganado el juego! 🎉</p>
-    <button onclick="cerrarPopup()">Cerrar</button>
+  <div class="contenedor">
+    <h1>Valida los 5 códigos</h1>
+    <div id="vidas">Vidas: 6 ❤️</div>
+    <form id="formulario">
+      <input type="text" id="codigo1" placeholder="Código 1" /><br>
+      <input type="text" id="codigo2" placeholder="Código 2" disabled /><br>
+      <input type="text" id="codigo3" placeholder="Código 3" disabled /><br>
+      <input type="text" id="codigo4" placeholder="Código 4" disabled /><br>
+      <input type="text" id="codigo5" placeholder="Código 5" disabled /><br>
+      <button type="submit">Validar</button>
+    </form>
+    <div id="resultado"></div>
   </div>
 
-  <p id="gameOver" class="oculto">💀 Game Over 💀</p>
+  <!-- Popup de victoria -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <img src="image-removebg-preview.png" alt="Copa" />
+      <h2>🎉 ¡Victoria! Todos los códigos son correctos 🎉</h2>
+      <button onclick="cerrarPopup()">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Popup de derrota -->
+  <div id="popup-derrota" class="popup">
+    <div class="popup-content">
+      <h2>💀 ¡Game Over! Te quedaste sin vidas</h2>
+      <button onclick="location.reload()">Reintentar</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
