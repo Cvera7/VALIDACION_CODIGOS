@@ -3,93 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Juego de Validación de Códigos</title>
+  <title>Juego de Validación</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="contenedor">
-    <h1>Valida los 5 códigos</h1>
+    <h1>Ingresa los códigos</h1>
     <form id="formulario">
-      <input type="text" id="codigo1" placeholder="Código 1"><br>
-      <input type="text" id="codigo2" placeholder="Código 2" disabled><br>
-      <input type="text" id="codigo3" placeholder="Código 3" disabled><br>
-      <input type="text" id="codigo4" placeholder="Código 4" disabled><br>
-      <input type="text" id="codigo5" placeholder="Código 5" disabled><br>
+      <input type="text" id="codigo1" maxlength="10" placeholder="Código 1" autofocus />
+      <input type="text" id="codigo2" maxlength="10" placeholder="Código 2" disabled />
+      <input type="text" id="codigo3" maxlength="10" placeholder="Código 3" disabled />
+      <input type="text" id="codigo4" maxlength="10" placeholder="Código 4" disabled />
+      <input type="text" id="codigo5" maxlength="10" placeholder="Código 5" disabled />
+      <button type="submit">Validar</button>
     </form>
+
     <div id="resultado"></div>
-    <p id="vidas">Vidas: 6</p>
+    <div class="exito" id="vidas">Vidas: 6 ❤️</div>
   </div>
 
-  <!-- Popup de victoria -->
+  <!-- Popup Victoria -->
   <div id="popup" class="popup">
     <div class="popup-content">
-      <img src="image-removebg-preview.png" alt="Copa" />
-      <h2 id="mensajeFinal"></h2>
+      <img src="image-removebg-preview.png" alt="Victoria">
+      <h2>¡Felicidades! Has ganado 🏆</h2>
       <button onclick="cerrarPopup()">Cerrar</button>
     </div>
   </div>
 
-  <script>
-    const codigosValidos = ["1", "2", "3", "4", "5"];
-    let vidas = 6;
-    let actual = 0;
+  <!-- Popup Game Over -->
+  <div id="gameover" class="popup">
+    <div class="popup-content">
+      <h2>😢 ¡Has perdido! Intenta de nuevo.</h2>
+      <button onclick="location.reload()">Reintentar</button>
+    </div>
+  </div>
 
-    const inputs = [
-      document.getElementById("codigo1"),
-      document.getElementById("codigo2"),
-      document.getElementById("codigo3"),
-      document.getElementById("codigo4"),
-      document.getElementById("codigo5")
-    ];
-
-    const resultado = document.getElementById("resultado");
-    const vidasElemento = document.getElementById("vidas");
-
-    inputs.forEach((input, index) => {
-      input.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          validarCodigo(index);
-        }
-      });
-    });
-
-    function validarCodigo(index) {
-      const valor = inputs[index].value.trim();
-      if (valor === codigosValidos[index]) {
-        resultado.innerHTML += `<p class="correcto">Código ${index + 1} correcto ✅</p>`;
-        inputs[index].disabled = true;
-        if (index < inputs.length - 1) {
-          inputs[index + 1].disabled = false;
-          inputs[index + 1].focus();
-        } else {
-          mostrarPopup("🎉 ¡Victoria! Todos los códigos son correctos 🎉");
-        }
-      } else {
-        vidas--;
-        resultado.innerHTML += `<p class="incorrecto">Código ${index + 1} incorrecto ❌</p>`;
-        vidasElemento.textContent = `Vidas: ${vidas}`;
-        if (vidas === 0) {
-          desactivarTodos();
-          mostrarPopup("💀 Game Over: Te quedaste sin vidas 💀");
-        }
-      }
-    }
-
-    function desactivarTodos() {
-      inputs.forEach(input => input.disabled = true);
-    }
-
-    function mostrarPopup(mensaje) {
-      document.getElementById("mensajeFinal").textContent = mensaje;
-      document.getElementById("popup").style.display = "flex";
-    }
-
-    function cerrarPopup() {
-      document.getElementById("popup").style.display = "none";
-      location.reload(); // reinicia el juego
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
 
