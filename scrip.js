@@ -1,52 +1,49 @@
 const codigosValidos = ["1", "2", "3", "4", "5"];
 let vidas = 6;
-let codigoActual = 0;
+let pasoActual = 0;
 
-document.getElementById("formulario").addEventListener("submit", function(e) {
+const inputs = [
+  document.getElementById("codigo1"),
+  document.getElementById("codigo2"),
+  document.getElementById("codigo3"),
+  document.getElementById("codigo4"),
+  document.getElementById("codigo5"),
+];
+
+document.getElementById("formulario").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  if (codigoActual >= codigosValidos.length || vidas <= 0) return;
+  const inputActual = inputs[pasoActual];
+  const valor = inputActual.value.trim();
 
-  const input = document.getElementById(`codigo${codigoActual + 1}`);
-  const valor = input.value.trim();
-  const resultadoDiv = document.getElementById("resultado");
+  const resultado = document.getElementById("resultado");
 
-  if (valor === codigosValidos[codigoActual]) {
-    resultadoDiv.innerHTML += `<p class="correcto">Código ${codigoActual + 1} correcto ✅</p>`;
-    input.disabled = true;
-    codigoActual++;
+  if (valor === codigosValidos[pasoActual]) {
+    const mensaje = document.createElement("p");
+    mensaje.className = "correcto";
+    mensaje.textContent = `Código ${pasoActual + 1} correcto ✅`;
+    resultado.appendChild(mensaje);
 
-    if (codigoActual < codigosValidos.length) {
-      const siguienteInput = document.getElementById(`codigo${codigoActual + 1}`);
-      siguienteInput.disabled = false;
-      siguienteInput.focus();
+    inputActual.disabled = true;
+    pasoActual++;
+
+    if (pasoActual < inputs.length) {
+      inputs[pasoActual].disabled = false;
+      inputs[pasoActual].focus();
     } else {
-      mostrarPopup("🎉 ¡Victoria! Todos los códigos son correctos 🎉");
+      document.getElementById("popup").style.display = "flex";
     }
   } else {
     vidas--;
-    document.getElementById("vidas").innerText = `Vidas: ${vidas} ❤️`;
-    resultadoDiv.innerHTML += `<p class="incorrecto">Código ${codigoActual + 1} incorrecto ❌</p>`;
+    const mensaje = document.createElement("p");
+    mensaje.className = "incorrecto";
+    mensaje.textContent = `Código ${pasoActual + 1} incorrecto ❌`;
+    resultado.appendChild(mensaje);
+
+    document.getElementById("vidas").textContent = `Vidas: ${vidas} ❤️`;
 
     if (vidas <= 0) {
-      mostrarPopup("💀 Game Over. Se acabaron las vidas.");
-      deshabilitarInputs();
-    }
-  }
-});
+      document.getElementById("formulario").querySelector("button").disabled = true;
+      document.getElemen
 
-function mostrarPopup(mensaje) {
-  document.getElementById("popup-mensaje").innerText = mensaje;
-  document.getElementById("popup").style.display = "flex";
-}
-
-function cerrarPopup() {
-  document.getElementById("popup").style.display = "none";
-}
-
-function deshabilitarInputs() {
-  for (let i = 1; i <= 5; i++) {
-    document.getElementById(`codigo${i}`).disabled = true;
-  }
-}
 
