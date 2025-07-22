@@ -37,5 +37,37 @@
   <script src="script.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juego de Códigos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="contenedor">
+    <p id="vidas" class="vidas">Vidas restantes: 6</p>
+    <h2>Valida los 5 códigos</h2>
+    <form id="formulario">
+      <input type="text" id="codigo1" placeholder="Código 1" required />
+      <input type="text" id="codigo2" placeholder="Código 2" required />
+      <input type="text" id="codigo3" placeholder="Código 3" required />
+      <input type="text" id="codigo4" placeholder="Código 4" required />
+      <input type="text" id="codigo5" placeholder="Código 5" required />
+      <button type="submit">Validar</button>
+    </form>
+    <div id="resultado"></div>
+    <div id="popup" class="popup">
+      <div class="popup-contenido">
+        <p id="mensajeFinal"></p>
+        <button onclick="cerrarPopup()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
 
