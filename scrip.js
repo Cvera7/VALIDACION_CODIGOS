@@ -1,8 +1,11 @@
 const codigosValidos = ["1", "2", "3", "4", "5"];
 let vidas = 6;
+let juegoTerminado = false;
 
-document.getElementById("btn-validar").addEventListener("click", function () {
-  if (vidas <= 0) return;
+document.getElementById("formulario").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  if (juegoTerminado) return;
 
   const ingresados = [
     document.getElementById("codigo1").value.trim(),
@@ -16,7 +19,7 @@ document.getElementById("btn-validar").addEventListener("click", function () {
   let todosCorrectos = true;
 
   ingresados.forEach((codigo, index) => {
-    if (codigo === codigosValidos[index]) {
+    if (codigosValidos[index] === codigo) {
       resultado += `<p class="correcto">Código ${index + 1} es correcto ✅</p>`;
     } else {
       resultado += `<p class="incorrecto">Código ${index + 1} es incorrecto ❌</p>`;
@@ -24,31 +27,28 @@ document.getElementById("btn-validar").addEventListener("click", function () {
     }
   });
 
-  if (!todosCorrectos) {
-    vidas--;
-    actualizarVidas();
-  }
-
   document.getElementById("resultado").innerHTML = resultado;
-
-  if (vidas <= 0) {
-    document.getElementById("gameover").textContent = "😢 Game Over. Has perdido todas tus vidas.";
-    document.getElementById("btn-validar").disabled = true;
-    document.querySelectorAll("input").forEach(input => input.disabled = true);
-    return;
-  }
 
   if (todosCorrectos) {
     document.getElementById("popup").style.display = "flex";
+  } else {
+    vidas--;
+    actualizarVidas();
+    if (vidas <= 0) {
+      document.getElementById("resultado").innerHTML = `<p class="gameover">Game Over. Has perdido todas tus vidas 😢</p>`;
+      juegoTerminado = true;
+      document.getElementById("btn-validar").disabled = true;
+    }
   }
 });
 
 function actualizarVidas() {
-  document.getElementById("vidas").textContent = vidas;
+  document.getElementById("vidas").innerText = `Vidas restantes: ${vidas}`;
 }
 
 function cerrarPopup() {
   document.getElementById("popup").style.display = "none";
 }
+
 
 
