@@ -8,16 +8,21 @@
 </head>
 <body>
   <div class="contenedor">
+    <div class="vidas">Vidas restantes: <span id="vidas">6</span></div>
+
     <h1>Valida los 5 códigos</h1>
+
     <form id="formulario">
       <input type="text" id="codigo1" placeholder="Código 1"><br>
       <input type="text" id="codigo2" placeholder="Código 2"><br>
       <input type="text" id="codigo3" placeholder="Código 3"><br>
       <input type="text" id="codigo4" placeholder="Código 4"><br>
       <input type="text" id="codigo5" placeholder="Código 5"><br>
-      <button type="submit">Validar</button>
+      <button type="submit" id="btn-validar">Validar</button>
     </form>
+
     <div id="resultado"></div>
+    <div id="gameover" class="gameover"></div>
   </div>
 
   <!-- Popup de victoria -->
@@ -29,41 +34,7 @@
     </div>
   </div>
 
-  <script>
-    const codigosValidos = ["1", "2", "3", "4", "5"];
-
-    document.getElementById("formulario").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const ingresados = [
-        document.getElementById("codigo1").value.trim(),
-        document.getElementById("codigo2").value.trim(),
-        document.getElementById("codigo3").value.trim(),
-        document.getElementById("codigo4").value.trim(),
-        document.getElementById("codigo5").value.trim()
-      ];
-
-      let resultado = "";
-      let todosCorrectos = true;
-
-      ingresados.forEach((codigo, index) => {
-        if (codigosValidos.includes(codigo)) {
-          resultado += `<p class="correcto">Código ${index + 1} es correcto ✅</p>`;
-        } else {
-          resultado += `<p class="incorrecto">Código ${index + 1} es incorrecto ❌</p>`;
-          todosCorrectos = false;
-        }
-      });
-
-      document.getElementById("resultado").innerHTML = resultado;
-
-      if (todosCorrectos) {
-        document.getElementById("popup").style.display = "flex";
-      }
-    });
-
-    function cerrarPopup() {
-      document.getElementById("popup").style.display = "none";
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
+
