@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Validación de Códigos</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <p class="vidas" id="vidas">Vidas restantes: 6</p>
-    <h1>Valida los 5 códigos</h1>
-    <form id="formulario">
-      <input type="text" id="codigo1" placeholder="Código 1" />
-      <input type="text" id="codigo2" placeholder="Código 2" disabled />
-      <input type="text" id="codigo3" placeholder="Código 3" disabled />
-      <input type="text" id="codigo4" placeholder="Código 4" disabled />
-      <input type="text" id="codigo5" placeholder="Código 5" disabled />
-      <button type="submit">Validar</button>
-    </form>
-    <div id="resultado"></div>
-    <div id="popup" class="popup">
-      <div class="popup-content">
-        <p>🎉 ¡Has ganado el juego! 🎉</p>
-        <button onclick="cerrarPopup()">Cerrar</button>
-      </div>
-    </div>
-    <div id="gameover" class="popup">
-      <div class="popup-content">
-        <p>💀 Game Over 💀</p>
-      </div>
-    </div>
+  <h3 id="vidas">Vidas restantes: 6</h3>
+  <h1>Valida los 5 códigos</h1>
+
+  <form id="formulario">
+    <input type="text" id="codigo1" placeholder="Código 1" required>
+    <input type="text" id="codigo2" placeholder="Código 2" disabled>
+    <input type="text" id="codigo3" placeholder="Código 3" disabled>
+    <input type="text" id="codigo4" placeholder="Código 4" disabled>
+    <input type="text" id="codigo5" placeholder="Código 5" disabled>
+    <button type="submit">Validar</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <div id="popup" class="popup">
+    <p>🎉 ¡Has ganado el juego! 🎉</p>
+    <button onclick="cerrarPopup()">Cerrar</button>
   </div>
+
+  <p id="gameOver" class="oculto">💀 Game Over 💀</p>
+
   <script src="script.js"></script>
 </body>
 </html>
+
