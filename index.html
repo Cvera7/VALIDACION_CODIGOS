@@ -9,28 +9,87 @@
 <body>
   <div class="contenedor">
     <h1>Valida los 5 códigos</h1>
-    <p id="vidas">Vidas: 6 ❤️</p>
     <form id="formulario">
-      <input type="text" id="codigo1" placeholder="Código 1" autofocus><br>
+      <input type="text" id="codigo1" placeholder="Código 1"><br>
       <input type="text" id="codigo2" placeholder="Código 2" disabled><br>
       <input type="text" id="codigo3" placeholder="Código 3" disabled><br>
       <input type="text" id="codigo4" placeholder="Código 4" disabled><br>
       <input type="text" id="codigo5" placeholder="Código 5" disabled><br>
-      <button type="submit">Validar</button>
     </form>
     <div id="resultado"></div>
+    <p id="vidas">Vidas: 6</p>
   </div>
 
   <!-- Popup de victoria -->
   <div id="popup" class="popup">
     <div class="popup-content">
       <img src="image-removebg-preview.png" alt="Copa" />
-      <h2 id="popup-mensaje">🎉 ¡Victoria! Todos los códigos son correctos 🎉</h2>
+      <h2 id="mensajeFinal"></h2>
       <button onclick="cerrarPopup()">Cerrar</button>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    const codigosValidos = ["1", "2", "3", "4", "5"];
+    let vidas = 6;
+    let actual = 0;
+
+    const inputs = [
+      document.getElementById("codigo1"),
+      document.getElementById("codigo2"),
+      document.getElementById("codigo3"),
+      document.getElementById("codigo4"),
+      document.getElementById("codigo5")
+    ];
+
+    const resultado = document.getElementById("resultado");
+    const vidasElemento = document.getElementById("vidas");
+
+    inputs.forEach((input, index) => {
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          validarCodigo(index);
+        }
+      });
+    });
+
+    function validarCodigo(index) {
+      const valor = inputs[index].value.trim();
+      if (valor === codigosValidos[index]) {
+        resultado.innerHTML += `<p class="correcto">Código ${index + 1} correcto ✅</p>`;
+        inputs[index].disabled = true;
+        if (index < inputs.length - 1) {
+          inputs[index + 1].disabled = false;
+          inputs[index + 1].focus();
+        } else {
+          mostrarPopup("🎉 ¡Victoria! Todos los códigos son correctos 🎉");
+        }
+      } else {
+        vidas--;
+        resultado.innerHTML += `<p class="incorrecto">Código ${index + 1} incorrecto ❌</p>`;
+        vidasElemento.textContent = `Vidas: ${vidas}`;
+        if (vidas === 0) {
+          desactivarTodos();
+          mostrarPopup("💀 Game Over: Te quedaste sin vidas 💀");
+        }
+      }
+    }
+
+    function desactivarTodos() {
+      inputs.forEach(input => input.disabled = true);
+    }
+
+    function mostrarPopup(mensaje) {
+      document.getElementById("mensajeFinal").textContent = mensaje;
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function cerrarPopup() {
+      document.getElementById("popup").style.display = "none";
+      location.reload(); // reinicia el juego
+    }
+  </script>
 </body>
 </html>
 
