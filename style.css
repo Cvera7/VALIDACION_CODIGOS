@@ -1,144 +1,64 @@
-/* === Estilo base === */
 body {
+  background-color: #86c5e0;
   font-family: 'Segoe UI', sans-serif;
-  background: #85c1e9;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .contenedor {
-  background: #d0ece7;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+  background: #d0eee8;
+  padding: 30px;
+  border-radius: 10px;
   text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-h1 {
-  color: #333;
-  margin-bottom: 20px;
+.vidas {
+  color: darkred;
+  font-weight: bold;
 }
 
 input {
-  width: 90%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #aaa;
 }
 
 button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4CAF50;
+  background-color: #3e914b;
   color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
 }
 
 .correcto {
   color: green;
-  margin: 5px 0;
 }
 
 .incorrecto {
   color: red;
-  margin: 5px 0;
 }
 
-.exito {
-  margin-top: 20px;
-  font-weight: bold;
-  color: #1c8f28;
-  background-color: #e1f5e3;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-/* === Popup de Victoria === */
 .popup {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(163, 228, 215);
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.6);
   justify-content: center;
   align-items: center;
-  z-index: 999;
 }
 
-.popup-content {
-  background: #d0ece7;
-  padding: 30px 40px;
-  border-radius: 12px;
+.popup-contenido {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
   text-align: center;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-  max-width: 90%;
-  width: 350px;
-  animation: aparecer 0.4s ease-out;
-}
-
-.popup-content img {
-  width: 80px;
-  margin-bottom: 15px;
-}
-
-.popup-content h2 {
-  font-size: 20px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.popup-content button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.popup-content button:hover {
-  background-color: #45a049;
-}
-
-@keyframes aparecer {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* === Contador de Vidas === */
-.vidas {
-  font-size: 18px;
-  font-weight: bold;
-  color: #c0392b;
-  margin-bottom: 15px;
-}
-
-/* === Mensaje Game Over === */
-.gameover {
-  color: #b03a2e;
-  font-weight: bold;
-  font-size: 18px;
-  margin-top: 15px;
 }
