@@ -1,43 +1,47 @@
 const codigosValidos = ["1", "2", "3", "4", "5"];
 let vidas = 6;
-let indiceActual = 0;
+let actual = 0;
 
 document.getElementById("formulario").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  if (vidas <= 0 || indiceActual >= 5) return;
+  if (vidas === 0 || actual >= 5) return;
 
-  const campo = document.getElementById(`codigo${indiceActual + 1}`);
-  const valor = campo.value.trim();
-
+  const inputActual = document.getElementById(`codigo${actual + 1}`);
+  const valorIngresado = inputActual.value.trim();
   const resultado = document.getElementById("resultado");
 
-  if (valor === codigosValidos[indiceActual]) {
-    resultado.innerHTML += `<p class="correcto">Código ${indiceActual + 1} correcto ✅</p>`;
-    campo.disabled = true;
+  if (valorIngresado === codigosValidos[actual]) {
+    resultado.innerHTML += `<p class="correcto">Código ${actual + 1} correcto ✅</p>`;
+    inputActual.disabled = true;
+    actual++;
 
-    indiceActual++;
-
-    if (indiceActual < 5) {
-      document.getElementById(`codigo${indiceActual + 1}`).disabled = false;
-      document.getElementById(`codigo${indiceActual + 1}`).focus();
+    if (actual < 5) {
+      document.getElementById(`codigo${actual + 1}`).disabled = false;
+      document.getElementById(`codigo${actual + 1}`).focus();
     } else {
-      document.getElementById("popup").style.display = "flex";
+      document.getElementById("popup").style.display = "block";
     }
 
   } else {
-    resultado.innerHTML += `<p class="incorrecto">Código ${indiceActual + 1} incorrecto ❌</p>`;
+    resultado.innerHTML += `<p class="incorrecto">Código ${actual + 1} incorrecto ❌</p>`;
     vidas--;
-    document.getElementById("vidas").textContent = `Vidas restantes: ${vidas}`;
-    campo.value = "";
-    campo.focus();
+    inputActual.value = "";
+    inputActual.focus();
+    document.getElementById("vidas").textContent = `Vidas: ${vidas}`;
 
     if (vidas === 0) {
-      document.getElementById("formulario").querySelectorAll("input").forEach(input => input.disabled = true);
+      document.getElementById("formulario").querySelectorAll("input").forEach(i => i.disabled = true);
+      document.querySelector("button").disabled = true;
       document.getElementById("gameOver").classList.remove("oculto");
     }
   }
 });
+
+function cerrarPopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
 
 function cerrarPopup() {
   document.getElementById("popup").style.display = "none";
