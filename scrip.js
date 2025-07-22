@@ -1,9 +1,7 @@
 const codigosValidos = ["1", "2", "3", "4", "5"];
 let vidas = 6;
 
-document.getElementById("formulario").addEventListener("submit", function(e) {
-  e.preventDefault();
-
+document.getElementById("btn-validar").addEventListener("click", function () {
   if (vidas <= 0) return;
 
   const ingresados = [
@@ -26,7 +24,6 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
     }
   });
 
-  // Restar 1 vida si hubo al menos un error
   if (!todosCorrectos) {
     vidas--;
     actualizarVidas();
