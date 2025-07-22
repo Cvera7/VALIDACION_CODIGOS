@@ -1,52 +1,36 @@
-const codigosValidos = ["1", "2", "3", "4", "5"];
-let vidas = 6;
-let codigoActual = 0;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juego de Validación de Códigos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Valida los 5 códigos</h1>
+    <p id="vidas">Vidas: 6 ❤️</p>
+    <form id="formulario">
+      <input type="text" id="codigo1" placeholder="Código 1" autofocus><br>
+      <input type="text" id="codigo2" placeholder="Código 2" disabled><br>
+      <input type="text" id="codigo3" placeholder="Código 3" disabled><br>
+      <input type="text" id="codigo4" placeholder="Código 4" disabled><br>
+      <input type="text" id="codigo5" placeholder="Código 5" disabled><br>
+      <button type="submit">Validar</button>
+    </form>
+    <div id="resultado"></div>
+  </div>
 
-document.getElementById("formulario").addEventListener("submit", function(e) {
-  e.preventDefault();
+  <!-- Popup de victoria -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <img src="image-removebg-preview.png" alt="Copa" />
+      <h2 id="popup-mensaje">🎉 ¡Victoria! Todos los códigos son correctos 🎉</h2>
+      <button onclick="cerrarPopup()">Cerrar</button>
+    </div>
+  </div>
 
-  if (codigoActual >= codigosValidos.length || vidas <= 0) return;
-
-  const input = document.getElementById(`codigo${codigoActual + 1}`);
-  const valor = input.value.trim();
-  const resultadoDiv = document.getElementById("resultado");
-
-  if (valor === codigosValidos[codigoActual]) {
-    resultadoDiv.innerHTML += `<p class="correcto">Código ${codigoActual + 1} correcto ✅</p>`;
-    input.disabled = true;
-    codigoActual++;
-
-    if (codigoActual < codigosValidos.length) {
-      const siguienteInput = document.getElementById(`codigo${codigoActual + 1}`);
-      siguienteInput.disabled = false;
-      siguienteInput.focus();
-    } else {
-      mostrarPopup("🎉 ¡Victoria! Todos los códigos son correctos 🎉");
-    }
-  } else {
-    vidas--;
-    document.getElementById("vidas").innerText = `Vidas: ${vidas} ❤️`;
-    resultadoDiv.innerHTML += `<p class="incorrecto">Código ${codigoActual + 1} incorrecto ❌</p>`;
-
-    if (vidas <= 0) {
-      mostrarPopup("💀 Game Over. Se acabaron las vidas.");
-      deshabilitarInputs();
-    }
-  }
-});
-
-function mostrarPopup(mensaje) {
-  document.getElementById("popup-mensaje").innerText = mensaje;
-  document.getElementById("popup").style.display = "flex";
-}
-
-function cerrarPopup() {
-  document.getElementById("popup").style.display = "none";
-}
-
-function deshabilitarInputs() {
-  for (let i = 1; i <= 5; i++) {
-    document.getElementById(`codigo${i}`).disabled = true;
-  }
-}
+  <script src="script.js"></script>
+</body>
+</html>
 
