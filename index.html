@@ -3,71 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Juego de Validación de Códigos</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Validación de Códigos</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-  <div class="contenedor">
-    <div class="vidas">Vidas restantes: <span id="vidas">6</span></div>
-
+  <div class="container">
+    <p class="vidas" id="vidas">Vidas restantes: 6</p>
     <h1>Valida los 5 códigos</h1>
-
-    <div id="campos">
-      <input type="text" id="codigo1" placeholder="Código 1"><br>
-      <input type="text" id="codigo2" placeholder="Código 2"><br>
-      <input type="text" id="codigo3" placeholder="Código 3"><br>
-      <input type="text" id="codigo4" placeholder="Código 4"><br>
-      <input type="text" id="codigo5" placeholder="Código 5"><br>
-      <button id="btn-validar">Validar</button>
-    </div>
-
-    <div id="resultado"></div>
-    <div id="gameover" class="gameover"></div>
-  </div>
-
-  <!-- Popup de victoria -->
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <img src="image-removebg-preview.png" alt="Copa" />
-      <h2>🎉 ¡Victoria! Todos los códigos son correctos 🎉</h2>
-      <button onclick="cerrarPopup()">Cerrar</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Juego de Códigos</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="contenedor">
-    <p id="vidas" class="vidas">Vidas restantes: 6</p>
-    <h2>Valida los 5 códigos</h2>
     <form id="formulario">
-      <input type="text" id="codigo1" placeholder="Código 1" required />
-      <input type="text" id="codigo2" placeholder="Código 2" required />
-      <input type="text" id="codigo3" placeholder="Código 3" required />
-      <input type="text" id="codigo4" placeholder="Código 4" required />
-      <input type="text" id="codigo5" placeholder="Código 5" required />
+      <input type="text" id="codigo1" placeholder="Código 1" />
+      <input type="text" id="codigo2" placeholder="Código 2" disabled />
+      <input type="text" id="codigo3" placeholder="Código 3" disabled />
+      <input type="text" id="codigo4" placeholder="Código 4" disabled />
+      <input type="text" id="codigo5" placeholder="Código 5" disabled />
       <button type="submit">Validar</button>
     </form>
     <div id="resultado"></div>
     <div id="popup" class="popup">
-      <div class="popup-contenido">
-        <p id="mensajeFinal"></p>
+      <div class="popup-content">
+        <p>🎉 ¡Has ganado el juego! 🎉</p>
         <button onclick="cerrarPopup()">Cerrar</button>
       </div>
     </div>
+    <div id="gameover" class="popup">
+      <div class="popup-content">
+        <p>💀 Game Over 💀</p>
+      </div>
+    </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
-
-
