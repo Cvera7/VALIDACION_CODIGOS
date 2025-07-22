@@ -68,7 +68,7 @@ button:hover {
 
 /* === Popup de Victoria === */
 .popup {
-  display: none; /* Oculto por defecto */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -125,4 +125,20 @@ button:hover {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* === Contador de Vidas === */
+.vidas {
+  font-size: 18px;
+  font-weight: bold;
+  color: #c0392b;
+  margin-bottom: 15px;
+}
+
+/* === Mensaje Game Over === */
+.gameover {
+  color: #b03a2e;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 15px;
 }
