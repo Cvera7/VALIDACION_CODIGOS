@@ -1,56 +1,44 @@
 const codigosValidos = ["1", "2", "3", "4", "5"];
 let vidas = 6;
-let codigoActual = 0;
+let indiceActual = 0;
 
-const form = document.getElementById("formulario");
-const campos = [
-  document.getElementById("codigo1"),
-  document.getElementById("codigo2"),
-  document.getElementById("codigo3"),
-  document.getElementById("codigo4"),
-  document.getElementById("codigo5"),
-];
-const resultado = document.getElementById("resultado");
-const vidasTexto = document.getElementById("vidas");
-const popup = document.getElementById("popup");
-const gameover = document.getElementById("gameover");
-
-form.addEventListener("submit", function (e) {
+document.getElementById("formulario").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  if (vidas <= 0 || codigoActual >= codigosValidos.length) return;
+  if (vidas <= 0 || indiceActual >= 5) return;
 
-  const campo = campos[codigoActual];
+  const campo = document.getElementById(`codigo${indiceActual + 1}`);
   const valor = campo.value.trim();
 
-  if (valor === codigosValidos[codigoActual]) {
-    resultado.innerHTML += `<p class="correcto">Código ${codigoActual + 1} correcto ✅</p>`;
+  const resultado = document.getElementById("resultado");
+
+  if (valor === codigosValidos[indiceActual]) {
+    resultado.innerHTML += `<p class="correcto">Código ${indiceActual + 1} correcto ✅</p>`;
     campo.disabled = true;
-    if (codigoActual < 4) {
-      campos[codigoActual + 1].disabled = false;
-      campos[codigoActual + 1].focus();
+
+    indiceActual++;
+
+    if (indiceActual < 5) {
+      document.getElementById(`codigo${indiceActual + 1}`).disabled = false;
+      document.getElementById(`codigo${indiceActual + 1}`).focus();
+    } else {
+      document.getElementById("popup").style.display = "flex";
     }
-    codigoActual++;
+
   } else {
-    resultado.innerHTML += `<p class="incorrecto">Código ${codigoActual + 1} incorrecto ❌</p>`;
+    resultado.innerHTML += `<p class="incorrecto">Código ${indiceActual + 1} incorrecto ❌</p>`;
     vidas--;
-    vidasTexto.textContent = `Vidas restantes: ${vidas}`;
-  }
+    document.getElementById("vidas").textContent = `Vidas restantes: ${vidas}`;
+    campo.value = "";
+    campo.focus();
 
-  campo.value = "";
-
-  if (codigoActual === 5) {
-    popup.style.display = "flex";
-  }
-
-  if (vidas === 0) {
-    form.querySelector("button").disabled = true;
-    campos.forEach(input => input.disabled = true);
-    gameover.style.display = "flex";
+    if (vidas === 0) {
+      document.getElementById("formulario").querySelectorAll("input").forEach(input => input.disabled = true);
+      document.getElementById("gameOver").classList.remove("oculto");
+    }
   }
 });
 
 function cerrarPopup() {
-  popup.style.display = "none";
+  document.getElementById("popup").style.display = "none";
 }
-
