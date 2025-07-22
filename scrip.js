@@ -1,60 +1,56 @@
 const codigosValidos = ["1", "2", "3", "4", "5"];
-let vidasRestantes = 6;
+let vidas = 6;
+let codigoActual = 0;
 
-document.getElementById("formulario").addEventListener("submit", function(e) {
+const form = document.getElementById("formulario");
+const campos = [
+  document.getElementById("codigo1"),
+  document.getElementById("codigo2"),
+  document.getElementById("codigo3"),
+  document.getElementById("codigo4"),
+  document.getElementById("codigo5"),
+];
+const resultado = document.getElementById("resultado");
+const vidasTexto = document.getElementById("vidas");
+const popup = document.getElementById("popup");
+const gameover = document.getElementById("gameover");
+
+form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  if (vidasRestantes <= 0) return;
+  if (vidas <= 0 || codigoActual >= codigosValidos.length) return;
 
-  const campos = [
-    document.getElementById("codigo1"),
-    document.getElementById("codigo2"),
-    document.getElementById("codigo3"),
-    document.getElementById("codigo4"),
-    document.getElementById("codigo5")
-  ];
+  const campo = campos[codigoActual];
+  const valor = campo.value.trim();
 
-  const ingresados = campos.map(c => c.value.trim());
-  let resultado = "";
-  let todosCorrectos = true;
-  let huboError = false;
-
-  ingresados.forEach((codigo, index) => {
-    if (codigosValidos[index] === codigo) {
-      resultado += `<p class="correcto">Código ${index + 1} correcto ✅</p>`;
-    } else {
-      resultado += `<p class="incorrecto">Código ${index + 1} incorrecto ❌</p>`;
-      todosCorrectos = false;
-      huboError = true;
+  if (valor === codigosValidos[codigoActual]) {
+    resultado.innerHTML += `<p class="correcto">Código ${codigoActual + 1} correcto ✅</p>`;
+    campo.disabled = true;
+    if (codigoActual < 4) {
+      campos[codigoActual + 1].disabled = false;
+      campos[codigoActual + 1].focus();
     }
-  });
-
-  if (huboError) {
-    vidasRestantes--;
-    document.getElementById("vidas").textContent = `Vidas restantes: ${vidasRestantes}`;
+    codigoActual++;
+  } else {
+    resultado.innerHTML += `<p class="incorrecto">Código ${codigoActual + 1} incorrecto ❌</p>`;
+    vidas--;
+    vidasTexto.textContent = `Vidas restantes: ${vidas}`;
   }
 
-  document.getElementById("resultado").innerHTML = resultado;
+  campo.value = "";
 
-  if (todosCorrectos) {
-    mostrarPopup("¡Ganaste!");
-    deshabilitarFormulario();
-  } else if (vidasRestantes <= 0) {
-    mostrarPopup("Game Over");
-    deshabilitarFormulario();
+  if (codigoActual === 5) {
+    popup.style.display = "flex";
+  }
+
+  if (vidas === 0) {
+    form.querySelector("button").disabled = true;
+    campos.forEach(input => input.disabled = true);
+    gameover.style.display = "flex";
   }
 });
 
-function mostrarPopup(mensaje) {
-  document.getElementById("mensajeFinal").textContent = mensaje;
-  document.getElementById("popup").style.display = "flex";
-}
-
 function cerrarPopup() {
-  document.getElementById("popup").style.display = "none";
+  popup.style.display = "none";
 }
 
-function deshabilitarFormulario() {
-  document.querySelectorAll("input").forEach(input => input.disabled = true);
-  document.querySelector("button").disabled = true;
-}
