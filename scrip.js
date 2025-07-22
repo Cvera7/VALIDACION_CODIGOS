@@ -1,41 +1,52 @@
 const codigosValidos = ["1", "2", "3", "4", "5"];
 let vidas = 6;
-let actual = 0;
+let codigoActual = 0;
 
 document.getElementById("formulario").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  if (vidas <= 0 || actual >= 5) return;
+  if (codigoActual >= codigosValidos.length || vidas <= 0) return;
 
-  const campo = document.getElementById("codigo" + (actual + 1));
-  const valor = campo.value.trim();
-  const resultado = document.getElementById("resultado");
+  const input = document.getElementById(`codigo${codigoActual + 1}`);
+  const valor = input.value.trim();
+  const resultadoDiv = document.getElementById("resultado");
 
-  if (valor === codigosValidos[actual]) {
-    resultado.innerHTML += `<p class="correcto">Código ${actual + 1} correcto ✅</p>`;
-    campo.disabled = true;
-    actual++;
+  if (valor === codigosValidos[codigoActual]) {
+    resultadoDiv.innerHTML += `<p class="correcto">Código ${codigoActual + 1} correcto ✅</p>`;
+    input.disabled = true;
+    codigoActual++;
 
-    if (actual < 5) {
-      document.getElementById("codigo" + (actual + 1)).disabled = false;
-      document.getElementById("codigo" + (actual + 1)).focus();
-    }
-
-    if (actual === 5) {
-      document.getElementById("popup").style.display = "flex";
+    if (codigoActual < codigosValidos.length) {
+      const siguienteInput = document.getElementById(`codigo${codigoActual + 1}`);
+      siguienteInput.disabled = false;
+      siguienteInput.focus();
+    } else {
+      mostrarPopup("🎉 ¡Victoria! Todos los códigos son correctos 🎉");
     }
   } else {
     vidas--;
-    resultado.innerHTML += `<p class="incorrecto">Código ${actual + 1} incorrecto ❌ - Te quedan ${vidas} vidas</p>`;
-    document.getElementById("vidas").textContent = `Vidas: ${vidas} ❤️`;
+    document.getElementById("vidas").innerText = `Vidas: ${vidas} ❤️`;
+    resultadoDiv.innerHTML += `<p class="incorrecto">Código ${codigoActual + 1} incorrecto ❌</p>`;
 
     if (vidas <= 0) {
-      document.getElementById("popup-derrota").style.display = "flex";
+      mostrarPopup("💀 Game Over. Se acabaron las vidas.");
+      deshabilitarInputs();
     }
   }
 });
 
+function mostrarPopup(mensaje) {
+  document.getElementById("popup-mensaje").innerText = mensaje;
+  document.getElementById("popup").style.display = "flex";
+}
+
 function cerrarPopup() {
   document.getElementById("popup").style.display = "none";
+}
+
+function deshabilitarInputs() {
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById(`codigo${i}`).disabled = true;
+  }
 }
 
